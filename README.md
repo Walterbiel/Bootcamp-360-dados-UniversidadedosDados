@@ -91,13 +91,38 @@ Mostrar orquestração e transformação
 
 ## 🛠️ Hands-on Orientado (40 min)
 
-> *Se possível com contas individuais ou lab compartilhado*
+<img width="2486" height="1496" alt="image" src="https://github.com/user-attachments/assets/b8ee926d-70d1-43a7-a5b5-6c2aaec74c92" />
+> ### Brazilian E-Commerce Public Dataset by Olist
+> https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce
+
+```python
+# Install dependencies as needed:
+# pip install kagglehub[pandas-datasets]
+import kagglehub
+from kagglehub import KaggleDatasetAdapter
+
+# Set the path to the file you'd like to load
+file_path = ""
+
+# Load the latest version
+df = kagglehub.load_dataset(
+  KaggleDatasetAdapter.PANDAS,
+  "olistbr/brazilian-ecommerce",
+  file_path,
+  # Provide any additional arguments like 
+  # sql_query or pandas_kwargs. See the 
+  # documenation for more information:
+  # https://github.com/Kaggle/kagglehub/blob/main/README.md#kaggledatasetadapterpandas
+)
+
+print("First 5 records:", df.head())
+```
 
 ### Tarefa: Executar como tutorial guiado caso os alunos não tenham acesso.
 1. Criar container no Data Lake
-2. Fazer upload de CSV
+2. Fazer upload de CSV ou extrair via API Kaggle
 3. Criar pipeline no ADF
-4. Ingerir dados para Azure SQL
+4. Ingerir dados para Postgres SQL
 5. Verificar resultado via query
 
 ---
