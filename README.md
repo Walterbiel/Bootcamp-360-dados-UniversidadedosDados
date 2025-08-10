@@ -105,6 +105,9 @@ O objetivo é capacitar o aluno desde a **introdução à engenharia de dados**,
 ---
 
 ## Base de Dados Usada
+
+<img width="2486" height="1496" alt="image" src="https://github.com/user-attachments/assets/82ab47d0-064e-4629-b17d-2600613aa7e4" />
+
 A base **Olist** contém dados de pedidos de e-commerce no Brasil, incluindo:
 - Clientes
 - Vendedores
