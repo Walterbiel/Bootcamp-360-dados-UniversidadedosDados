@@ -104,7 +104,85 @@ O objetivo é capacitar o aluno desde a **introdução à engenharia de dados**,
 
 ---
 
-## Base de Dados Usada
+### 7) Power BI — DAX Avançado, RLS e What If (Walter)
+**Objetivo:** Realizar análises avançadas com DAX, aplicar segurança a nível de linha (RLS) e criar cenários de simulação (What If).
+
+**Conteúdos:**
+- **DAX Avançado**
+  - Variáveis: `VAR`/`RETURN` para clareza e performance.
+  - Funções iteradoras: `SUMX`, `AVERAGEX`, `COUNTX` em tabelas virtuais.
+  - Distintos e contagens: `DISTINCTCOUNT`, `VALUES`.
+  - Controlo de contexto: `CALCULATE`, `FILTER`, `ALL`, `ALLEXCEPT`, `REMOVEFILTERS`, `KEEPFILTERS`.
+  - Datas (time intelligence): `DATEADD`, `SAMEPERIODLASTYEAR`, `TOTALYTD`, `DATESYTD`, `PARALLELPERIOD`.
+  - Relações inativas: `USERELATIONSHIP` (ex.: usar data de entrega vs data de compra).
+  - Métricas acumuladas (running totals) e variação MoM/YoY.
+- **RLS — Row Level Security**
+  - Criar papéis (Roles) e expressões de filtro no Model view.
+  - Herança via relacionamentos (filtrar por `olist_sellers_dataset` → restringe fatos relacionados).
+  - Boas práticas: tabela de utilizadores/disconectada para mapeamento (opcional).
+- **What If**
+  - Parâmetros com slider para simular aumento/redução de preço, desconto de frete, etc.
+  - Medidas que usam o parâmetro para recalcular KPIs (receita, ticket médio, margem).
+
+**Exemplos de medidas (DAX):**
+```DAX
+-- Receita bruta (price + freight)
+m_Revenue := SUM('olist_order_items_dataset'[price]) + SUM('olist_order_items_dataset'[freight_value])
+
+-- Receita YTD (data de compra)
+m_Revenue_YTD := TOTALYTD([m_Revenue], 'Calendar'[Date])
+
+-- Receita YoY (variação %)
+m_Revenue_PY := CALCULATE([m_Revenue], DATEADD('Calendar'[Date], -1, YEAR))
+m_Revenue_YoY_% := DIVIDE([m_Revenue] - [m_Revenue_PY], [m_Revenue_PY])
+
+-- Receita por data de entrega (usar relação inativa Orders(delivered)->Calendar)
+m_Revenue_Delivered := CALCULATE(
+    [m_Revenue],
+    USERELATIONSHIP('olist_orders_dataset'[order_delivered_customer_date], 'Calendar'[Date])
+)
+
+-- Ticket médio
+m_Ticket := DIVIDE([m_Revenue], DISTINCTCOUNT('olist_orders_dataset'[order_id]))
+
+-- Receita acumulada (running total por mês)
+m_Revenue_Cum := CALCULATE(
+    [m_Revenue],
+    FILTER(ALL('Calendar'[Date]), 'Calendar'[Date] <= MAX('Calendar'[Date]))
+)
+```
+
+**Parâmetro What If (exemplo):**
+1. Modelagem → Parâmetros → **Novo parâmetro (What if)**  
+   - Nome: `p_Price_Uplift_%`  
+   - Mín: 0, Máx: 20, Incremento: 0.5, Valor padrão: 0  
+   - Criar slicer no relatório com o campo `[p_Price_Uplift_% Value]`.
+2. Medida de cenário:
+```DAX
+m_Revenue_Adjusted :=
+VAR uplift = SELECTEDVALUE('p_Price_Uplift_%'[p_Price_Uplift_% Value], 0)
+RETURN [m_Revenue] * (1 + uplift/100.0)
+```
+3. Opcional: simular **desconto de frete** com outro parâmetro e combinar cenários.
+
+**RLS (exemplo por estado do seller):**
+1. Model view → **Manage roles** → New.  
+2. Selecionar tabela `'olist_sellers_dataset'` e aplicar filtro:
+```DAX
+'olist_sellers_dataset'[seller_state] = "SP"
+```
+3. Garantir relacionamentos da tabela de sellers com fatos (`order_items`) para propagar o filtro.  
+4. Testar o papel (View as role) e no Service atribuir utilizadores ao papel.
+
+**Exercícios:**
+- Criar medidas **MoM** e **YoY** de receita e pedidos entregues.
+- Implementar `USERELATIONSHIP` para comparar KPIs por **data de compra** vs **data de entrega**.
+- Criar dois parâmetros What If (uplift de preço e desconto de frete) e um visual que compare KPIs originais vs ajustados.
+- Configurar **RLS por seller_state** com dois papéis (ex.: SP e RJ) e validar a filtragem nos visuais.
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+# Base de Dados Usada
 
 <img width="2486" height="1496" alt="image" src="https://github.com/user-attachments/assets/82ab47d0-064e-4629-b17d-2600613aa7e4" />
 
