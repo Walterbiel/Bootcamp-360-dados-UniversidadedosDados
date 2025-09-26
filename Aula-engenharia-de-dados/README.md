@@ -58,7 +58,7 @@
 
 ---
 
-## 💻 Demonstração 1 – Azure Data Lake +  SQL (25 min)
+## 💻 Demonstração 1 – Azure Data Lake +  SQL + Apache Hop + Exemplo Python(90 minutos)
 
 ### Objetivo:
 Mostrar armazenamento e infra do sql
