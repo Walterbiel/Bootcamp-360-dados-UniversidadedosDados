@@ -104,7 +104,7 @@ CREATE SCHEMA IF NOT EXISTS public;
 ## 3) `schema.sql`
 
 ```sql
-CREATE TABLE public.olist_customers (
+CREATE TABLE olist.olist_customers (
   customer_id TEXT PRIMARY KEY,
   customer_unique_id TEXT,
   customer_zip_code_prefix INTEGER,
@@ -112,7 +112,7 @@ CREATE TABLE public.olist_customers (
   customer_state TEXT
 );
 
-CREATE TABLE public.olist_geolocation (
+CREATE TABLE olist.olist_geolocation (
   geolocation_zip_code_prefix INTEGER,
   geolocation_lat DOUBLE PRECISION,
   geolocation_lng DOUBLE PRECISION,
@@ -121,7 +121,7 @@ CREATE TABLE public.olist_geolocation (
   PRIMARY KEY (geolocation_zip_code_prefix, geolocation_lat, geolocation_lng)
 );
 
-CREATE TABLE public.olist_order_items (
+CREATE TABLE olist.olist_order_items (
   order_id TEXT,
   order_item_id INTEGER,
   product_id TEXT,
@@ -132,7 +132,7 @@ CREATE TABLE public.olist_order_items (
   PRIMARY KEY (order_id, order_item_id)
 );
 
-CREATE TABLE public.olist_order_payments (
+CREATE TABLE olist.olist_order_payments (
   order_id TEXT,
   payment_sequential INTEGER,
   payment_type TEXT,
@@ -141,7 +141,7 @@ CREATE TABLE public.olist_order_payments (
   PRIMARY KEY (order_id, payment_sequential)
 );
 
-CREATE TABLE public.olist_order_reviews (
+CREATE TABLE olist.olist_order_reviews (
   review_id TEXT PRIMARY KEY,
   order_id TEXT,
   review_score SMALLINT,
@@ -151,7 +151,7 @@ CREATE TABLE public.olist_order_reviews (
   review_answer_timestamp TIMESTAMP
 );
 
-CREATE TABLE public.olist_orders (
+CREATE TABLE olist.olist_orders (
   order_id TEXT PRIMARY KEY,
   customer_id TEXT,
   order_status TEXT,
@@ -162,7 +162,7 @@ CREATE TABLE public.olist_orders (
   order_estimated_delivery_date TIMESTAMP
 );
 
-CREATE TABLE public.olist_products (
+CREATE TABLE olist.olist_products (
   product_id TEXT PRIMARY KEY,
   product_category_name TEXT,
   product_name_lenght INTEGER,
@@ -174,14 +174,14 @@ CREATE TABLE public.olist_products (
   product_width_cm INTEGER
 );
 
-CREATE TABLE public.olist_sellers (
+CREATE TABLE olist.olist_sellers (
   seller_id TEXT PRIMARY KEY,
   seller_zip_code_prefix INTEGER,
   seller_city TEXT,
   seller_state TEXT
 );
 
-CREATE TABLE public.product_category_name_translation (
+CREATE TABLE olist.product_category_name_translation (
   product_category_name TEXT PRIMARY KEY,
   product_category_name_english TEXT
 );
