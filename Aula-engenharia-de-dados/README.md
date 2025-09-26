@@ -114,12 +114,14 @@ CREATE TABLE olist.olist_customers (
 
 CREATE TABLE olist.olist_geolocation (
   geolocation_zip_code_prefix INTEGER,
-  geolocation_lat DOUBLE PRECISION,
-  geolocation_lng DOUBLE PRECISION,
+  geolocation_lat NUMERIC(10,6),
+  geolocation_lng NUMERIC(10,6),
   geolocation_city TEXT,
   geolocation_state TEXT,
   PRIMARY KEY (geolocation_zip_code_prefix, geolocation_lat, geolocation_lng)
 );
+
+
 
 CREATE TABLE olist.olist_order_items (
   order_id TEXT,
@@ -192,11 +194,11 @@ Rodar pipeline do hop para popular as tabelas, com esse create table vai dar err
 Rodar:
 ```
 -- 1. Remove a constraint de PK atual
-ALTER TABLE public.olist_geolocation
+ALTER TABLE olist.olist_geolocation
   DROP CONSTRAINT olist_geolocation_pkey;
 
 -- 2. Cria uma nova PK com todas as colunas
-ALTER TABLE public.olist_geolocation
+ALTER TABLE olist.olist_geolocation
   ADD CONSTRAINT olist_geolocation_pkey
   PRIMARY KEY (
     geolocation_zip_code_prefix,
@@ -206,11 +208,25 @@ ALTER TABLE public.olist_geolocation
     geolocation_state
   );
 ```
-Retirar lazy conversion do olist_order_review:
+Retirar lazy conversion do olist_order_review e na geolocation:
+Arredondar casas decimais em novas colunas > retirar as colunas antigas > renomear as novas > retirar duplicatas:
+
 <img width="1246" height="591" alt="image" src="https://github.com/user-attachments/assets/058b8e49-456d-40af-a1b3-4ed23bf78c03" />
 
-Depois ordenar e retirar duplicatas da geolocalização:
-<img width="500" height="192" alt="image" src="https://github.com/user-attachments/assets/08ba4a84-244c-41a6-afb3-8e4c01df105a" />
+Depois criar as etapas a seguir para corrigir a retirada de duplicadas da tabela de geolocalização:
+<img width="1190" height="181" alt="image" src="https://github.com/user-attachments/assets/8f15859f-4ed8-4c65-a50b-3a5c597c0688" />
+
+<img width="1083" height="279" alt="image" src="https://github.com/user-attachments/assets/a2957314-d09f-432c-aaf3-fe1224ebdccf" />
+
+<img width="347" height="251" alt="image" src="https://github.com/user-attachments/assets/b349528d-a8e1-48a4-81f1-c5e66a522ec6" />
+
+<img width="548" height="278" alt="image" src="https://github.com/user-attachments/assets/799557f9-bfb8-432a-a896-f985b7cd4f5f" />
+
+<img width="1013" height="378" alt="image" src="https://github.com/user-attachments/assets/dc7bd4c3-5a8a-4491-bbf0-d19fb27b5fd4" />
+
+
+
+
 
 
 
