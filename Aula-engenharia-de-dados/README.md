@@ -189,6 +189,31 @@ CREATE TABLE public.product_category_name_translation (
 Rodar pipeline do hop para popular as tabelas, com esse create table vai dar erro em 2 tabelas, que devem ser corrigidas, mostrando a impoportancia da chave primaria e dos tipos de dados corretos:
 <img width="1391" height="994" alt="image" src="https://github.com/user-attachments/assets/72d5779e-1361-48a8-b200-9fc361e4c5ac" />
 
+Rodar:
+```
+-- 1. Remove a constraint de PK atual
+ALTER TABLE public.olist_geolocation
+  DROP CONSTRAINT olist_geolocation_pkey;
+
+-- 2. Cria uma nova PK com todas as colunas
+ALTER TABLE public.olist_geolocation
+  ADD CONSTRAINT olist_geolocation_pkey
+  PRIMARY KEY (
+    geolocation_zip_code_prefix,
+    geolocation_lat,
+    geolocation_lng,
+    geolocation_city,
+    geolocation_state
+  );
+```
+Retirar lazy conversion do olist_order_review:
+<img width="1246" height="591" alt="image" src="https://github.com/user-attachments/assets/058b8e49-456d-40af-a1b3-4ed23bf78c03" />
+
+Depois ordenar e retirar duplicatas da geolocalização:
+<img width="500" height="192" alt="image" src="https://github.com/user-attachments/assets/08ba4a84-244c-41a6-afb3-8e4c01df105a" />
+
+
+
 
 ---
 
