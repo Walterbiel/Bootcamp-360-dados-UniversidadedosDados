@@ -186,6 +186,9 @@ CREATE TABLE public.product_category_name_translation (
   product_category_name_english TEXT
 );
 ```
+Rodar pipeline do hop para popular as tabelas, com esse create table vai dar erro em 2 tabelas, que devem ser corrigidas, mostrando a impoportancia da chave primaria e dos tipos de dados corretos:
+<img width="1391" height="994" alt="image" src="https://github.com/user-attachments/assets/72d5779e-1361-48a8-b200-9fc361e4c5ac" />
+
 
 ---
 
