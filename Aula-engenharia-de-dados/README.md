@@ -3,8 +3,8 @@
 **Duração:** 3 horas  
 **Público-alvo:** Iniciantes (0 conhecimento prévio)  
 **Base:** Livro "Fundamentos da Engenharia de Dados"  
-**Plataforma:** Microsoft Azure  
-**Objetivo:** Apresentar de forma clara e prática os fundamentos da Engenharia de Dados e aplicar conceitos usando Azure SQL, Data Lake e Data Factory.
+
+**Objetivo:** Apresentar de forma clara e prática os fundamentos da Engenharia de Dados e aplicar conceitos usando Azure data factory, apache hop,postgres, dbeaver e Data Lake.
 
 ---
 
@@ -12,58 +12,23 @@
 
 | Bloco | Tema | Duração | Objetivo |
 |-------|------|---------|----------|
-| 1 | Abertura + Agenda + Introdução | 10 min | Engajar, alinhar expectativas |
-| 2 | Diferenças entre Engenharia, Análise e Ciência de Dados | 15 min | Entender papéis e responsabilidades |
-| 3 | Fundamentos da Engenharia de Dados | 30 min | Teoria: ciclo de vida e elementos essenciais |
-| 4 | Demonstração 1: Azure Data Lake + Azure SQL | 25 min | Mostrar armazenamento e ingestão |
-| 5 | Demonstração 2: Azure Data Factory | 25 min | Mostrar transformação e orquestração |
-| 6 | Hands-on Orientado (Lab ou Guiado) | 40 min | Atividade prática básica no Azure |
+| 1 | Abertura + Agenda + Introdução | 15 min | Engajar, alinhar expectativas |
+| 2 | Teoria dos fundamentos da engenharia de dados Slide 1 a 7| 30 min | Entender papéis e responsabilidades |
+| 3 | Questões sobre fundamentos da engenharia de dados | 10 min | Quiz |
+| 4 | Introdução a bancos de dados relacionais | 15 min |Criação dos metadados DW Olist e entendimento dos relacionamentos|
+| 5 | Demonstração 1: Pipeline com Apache Hop | 35 min | Mostrar transformação e orquestração |
+| 6 | Demonstração 2: Pipeline amazon com Azure Data Factory e Data lake (Arquitetura medallion) | 60 min | Atividade prática básica no Azure |
 | 7 | Conclusão + Dicas + Perguntas | 15 min | Recapitular e abrir para dúvidas |
 
 ---
 
-## 👥 Diferença entre Engenharia, Análise e Ciência de Dados (15 min)
-
-| Papel | Foco | Entregável | Ferramentas |
-|-------|------|------------|-------------|
-| **Engenheiro de Dados** | Infraestrutura e pipelines | Bases estruturadas e acessíveis | Spark, SQL, Data Factory |
-| **Analista de Dados** | Exploração e relatórios | Dashboards e KPIs | Power BI, Excel, SQL |
-| **Cientista de Dados** | Modelagem preditiva | Modelos e previsões | Python, ML, Jupyter |
-
-> 💡 **Resumo:**  
-> O engenheiro prepara e entrega os dados.  
-> O analista consome e interpreta.  
-> O cientista modela e prevê.
 
 ---
 
-## ⚙️ Fundamentos da Engenharia de Dados (30 min)
-
-### 🔁 Ciclo de Vida
-
-1. **Geração de dados**: sistemas, sensores, APIs
-2. **Armazenamento**: Data Lakes, bancos relacionais
-3. **Ingestão**: movimentar dados (batch, streaming)
-4. **Transformação**: limpeza, padronização, enriquecimento
-5. **Disponibilização**: camadas de consumo (BI, APIs)
-
-### 🔧 Elementos Subjacentes
-
-- **Segurança**: controle de acesso, criptografia, compliance
-- **Engenharia de Dados como Disciplina**: versionamento, testes
-- **DataOps**: automação, deploy, CI/CD
-- **Arquitetura de Dados**: modular, escalável, eficiente
-- **Orquestração**: controle de fluxo e dependências
-- **Engenharia de Software**: código limpo, funções reutilizáveis
-
----
-
-## 💻 Demonstração 1 – Azure Data Lake +  SQL + Apache Hop + Exemplo Python(90 minutos)
+## 💻 Introdução a bancos de dados e criação dos metadados
 
 ### Objetivo:
-Mostrar armazenamento e infra do sql
-
-> 💡 Conceitos explicados: Data Lake como Bronze, Azure SQL como Silver/Gold
+Mostrar armazenamento e infra do sqleu sa
 
 ### Scripts SQL e Explicações para PostgreSQL
 **Objetivo:** Reunir scripts SQL completos para criar tabelas baseadas no dataset Olist, com chaves primárias, índices e orientações de carga.
